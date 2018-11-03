@@ -6,6 +6,30 @@ new Vue({
         monsterHealth: 100,
         attackLog: []
     },
+    watch: {
+        playerHealth: function(value) {
+            if(value <= 0) {
+                let answer = confirm('You Lose. Try again?');
+                if (answer) {
+                    this.startNewGame();
+                }
+                else {
+                    this.gameStarted = !this.gameStarted;
+                }
+            }
+        },
+        monsterHealth: function(value) {
+            if (value <= 0) {
+                let answer = confirm('You won!! Play again?');
+                if (answer) {
+                    this.startNewGame();
+                }
+                else {
+                    this.gameStarted = !this.gameStarted;
+                }
+            }
+        }
+    },
     methods: {
         startNewGame: function() {
             this.gameStarted = !this.gameStarted;
