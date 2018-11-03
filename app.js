@@ -7,6 +7,12 @@ new Vue({
         attackLog: []
     },
     methods: {
+        startNewGame: function() {
+            this.gameStarted = !this.gameStarted;
+            this.playerHealth = 100;
+            this.monsterHealth = 100;
+            this.attackLog = [];
+        },
         attack: function() {
             let playerAttack = Math.floor(Math.random() * 10);
             let monsterAttack = Math.floor(Math.random() * 10);
