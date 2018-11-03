@@ -32,14 +32,14 @@ new Vue({
     },
     methods: {
         startNewGame: function() {
-            this.gameStarted = !this.gameStarted;
+            this.gameStarted = true;
             this.playerHealth = 100;
             this.monsterHealth = 100;
             this.attackLog = [];
         },
         attack: function() {
-            let playerAttack = Math.floor(Math.random() * 10);
-            let monsterAttack = Math.floor(Math.random() * 10);
+            let playerAttack = this.calculateDamage(3, 10);
+            let monsterAttack = this.calculateDamage(5, 12);
 
             this.playerHealth -= monsterAttack;
             this.monsterHealth -= playerAttack;
@@ -50,8 +50,8 @@ new Vue({
             });
         },
         specialAttack: function() {
-            let playerAttack = Math.floor(Math.random() * 20);
-            let monsterAttack = Math.floor(Math.random() * 20);
+            let playerAttack = this.calculateDamage(7, 15);
+            let monsterAttack = this.calculateDamage(5, 12);
 
             this.playerHealth -= monsterAttack;
             this.monsterHealth -= playerAttack;
@@ -62,7 +62,7 @@ new Vue({
             });
         },
         heal: function() {
-            let monsterAttack = Math.floor(Math.random() * 10);
+            let monsterAttack = this.calculateDamage(5, 12);
             let message;
             this.playerHealth -= monsterAttack;
             if (this.playerHealth + 10 > 100) {
@@ -78,6 +78,9 @@ new Vue({
                 pAttack: message,
                 mAttack: `Monster hits player with ${monsterAttack} damage`
             });
+        }, 
+        calculateDamage: function(min, max) {
+            return Math.max(Math.floor(Math.random() * max) + 1, min);
         }
     }
 });
